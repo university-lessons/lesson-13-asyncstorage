@@ -149,9 +149,20 @@ export default function App() {
         age: 26,
       };
 
-      await AsyncStorageHelper.setObject("hobj", user);
-      const objResult = (await AsyncStorageHelper.getObject("hobj2")) as TUser;
+      await AsyncStorageHelper.setObject<TUser>("hobj", user);
+      const objResult = await AsyncStorageHelper.getObject<TUser>("hobj2");
       console.log(objResult);
+
+      // object com retorno default
+      const objDefault = await AsyncStorageHelper.getObject<TUser>(
+        "hnumber222",
+        {
+          name: "def",
+          age: 99,
+          id: 999,
+        } // se isto não existir, ele retorna null
+      );
+      console.log(objDefault);
     } catch (e) {
       console.error(e);
     }

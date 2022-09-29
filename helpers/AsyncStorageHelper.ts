@@ -29,11 +29,11 @@ const getBoolean = async (key: string, defaultValue?: boolean) => {
   return null;
 };
 
-const setObject = async (key: string, value: any) => {
+const setObject = async <T>(key: string, value: T) => {
   await AsyncStorage.setItem(key, JSON.stringify(value));
 };
 
-const getObject = async (key: string, defaultValue?: any) => {
+const getObject = async <T>(key: string, defaultValue?: T): Promise<T> => {
   const val = await AsyncStorage.getItem(key);
   return JSON.parse(val) || defaultValue || null;
 };
