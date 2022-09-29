@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorageHelper from "./helpers/AsyncStorageHelper";
 
 export default function App() {
   // Versão da documentação: com async/await
@@ -94,7 +95,69 @@ export default function App() {
     }
   };
 
-  longExample();
+  // longExample();
+
+  // Exemplo com helper (várias operações)
+  const helperExample = async () => {
+    try {
+      // tratando strings
+      await AsyncStorageHelper.setString("hstring", "Hello Helper");
+      const stringResult = await AsyncStorageHelper.getString("hstring");
+      console.log(stringResult);
+
+      // string com retorno default
+      const stringDefault = await AsyncStorageHelper.getString(
+        "hstring2222",
+        "mydefault" // se isto não existir, ele retorna null
+      );
+      console.log(stringDefault);
+
+      // tratando number
+      await AsyncStorageHelper.setNumber("hnumber", 123.456);
+      const numberResult = await AsyncStorageHelper.getNumber("hnumber", 10);
+      console.log(numberResult);
+
+      // number com retorno default
+      const numberDefault = await AsyncStorageHelper.getNumber(
+        "hnumber222",
+        123 // se isto não existir, ele retorna null
+      );
+      console.log(numberDefault);
+
+      // tratando boolean
+      await AsyncStorageHelper.setBoolean("hboolean", false);
+      const booleanResult = await AsyncStorageHelper.getBoolean("hboolean");
+      console.log(typeof booleanResult, booleanResult);
+
+      // boolean com retorno default
+      const booleanDefault = await AsyncStorageHelper.getBoolean(
+        "hnumber222",
+        true // se isto não existir, ele retorna null
+      );
+      console.log(booleanDefault);
+
+      // tratando object
+      type TUser = {
+        name: string;
+        id: Number;
+        age: number;
+      };
+
+      const user: TUser = {
+        name: "Beltrano",
+        id: 14,
+        age: 26,
+      };
+
+      await AsyncStorageHelper.setObject("hobj", user);
+      const objResult = (await AsyncStorageHelper.getObject("hobj2")) as TUser;
+      console.log(objResult);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  helperExample();
 
   return (
     <View style={styles.container}>
