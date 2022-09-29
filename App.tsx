@@ -34,7 +34,7 @@ export default function App() {
   //   });
 
   // Exemplo longo (várias operações)
-  const longExample = async (value) => {
+  const longExample = async () => {
     try {
       //--------------------------- Salvar dados
       // armazenar string:
@@ -62,15 +62,21 @@ export default function App() {
       console.log(bool1Saved);
 
       //--------------------------- Salvar objeto
-      const user = {
+      type TUser = {
+        name: string;
+        id: Number;
+        age: number;
+      };
+
+      const user: TUser = {
         name: "Beltrano",
         id: 14,
         age: 26,
       };
       await AsyncStorage.setItem("user", JSON.stringify(user));
 
-      //--------------------------- Obter objeto
-      const userSaved = JSON.parse(await AsyncStorage.getItem("user"));
+      //--------------------------- Obter objeto (note o cast ao final com "as")
+      const userSaved = JSON.parse(await AsyncStorage.getItem("user")) as TUser;
       console.log(userSaved);
       console.log(userSaved.name);
 
