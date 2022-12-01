@@ -151,7 +151,7 @@ export default function App() {
 
       await AsyncStorageHelper.setObject<TUser>("hobj", user);
       const objResult = await AsyncStorageHelper.getObject<TUser>("hobj2");
-      console.log(objResult);
+      console.log("get obj null without default:", objResult);
 
       // object com retorno default
       const objDefault = await AsyncStorageHelper.getObject<TUser>(
@@ -162,7 +162,10 @@ export default function App() {
           id: 999,
         } // se isto não existir, ele retorna null
       );
-      console.log(objDefault);
+      console.log("get obj null without default:", objDefault);
+
+      const objResult3 = await AsyncStorageHelper.getObject<TUser>("hobj");
+      console.log("get valid obj:", objResult3);
     } catch (e) {
       console.error(e);
     }

@@ -14,8 +14,11 @@ const setNumber = async (key: string, value: number) => {
 };
 
 const getNumber = async (key: string, defaultValue?: number) => {
-  const val = parseFloat(await AsyncStorage.getItem(key));
-  return val || defaultValue || null;
+  const val = await AsyncStorage.getItem(key);
+  if (val) {
+    return parseFloat(val);
+  }
+  return defaultValue || null;
 };
 
 const setBoolean = async (key: string, value: boolean) => {
@@ -33,9 +36,21 @@ const setObject = async <T>(key: string, value: T) => {
   await AsyncStorage.setItem(key, JSON.stringify(value));
 };
 
-const getObject = async <T>(key: string, defaultValue?: T): Promise<T> => {
+const getObject = async <T>(
+  key: string,
+  defaultValue?: T
+): Promise<T | null> => {
   const val = await AsyncStorage.getItem(key);
-  return JSON.parse(val) || defaultValue || null;
+
+  if (val != null) {
+    return JSON.parse(val);
+  }
+
+  if (defaultValue) {
+    return defaultValue;
+  }
+
+  return null;
 };
 
 const AsyncStorageHelper = {
