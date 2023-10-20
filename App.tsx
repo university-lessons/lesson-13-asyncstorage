@@ -12,18 +12,23 @@ import useToken from "./hooks/useToken";
 export default function App() {
   const { token, updateToken, clearToken } = useToken();
 
-  // if (!token) return <Redirect href="/login" />;
+  if (token === undefined) return <ActivityIndicator />;
+
+  if (token)
+    return (
+      <View style={styles.container}>
+        <Text>Token: {token}</Text>
+        <Button title="Clear Token" onPress={() => clearToken()} />
+        <StatusBar style="auto" />
+      </View>
+    );
 
   return (
     <View style={styles.container}>
-      <Text>Token: {token}</Text>
       <Button
         title="Set Token"
         onPress={() => updateToken("Bearer " + Math.random())}
       />
-
-      <Button title="Clear Token" onPress={() => clearToken()} />
-      <StatusBar style="auto" />
     </View>
   );
 }
