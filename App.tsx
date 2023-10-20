@@ -1,11 +1,28 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StatusBar } from "expo-status-bar";
-import { Button, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Button,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import useToken from "./hooks/useToken";
 
 export default function App() {
+  const { token, updateToken, clearToken } = useToken();
+
+  // if (!token) return <Redirect href="/login" />;
+
   return (
     <View style={styles.container}>
-      <Text>Token: </Text>
-      <Button title="Set Token" onPress={() => {}} />
+      <Text>Token: {token}</Text>
+      <Button
+        title="Set Token"
+        onPress={() => updateToken("Bearer " + Math.random())}
+      />
+
+      <Button title="Clear Token" onPress={() => clearToken()} />
       <StatusBar style="auto" />
     </View>
   );
