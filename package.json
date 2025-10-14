@@ -10,19 +10,20 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "1.19.3",
-    "expo": "^49.0.16",
-    "expo-status-bar": "~1.4.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-native": "0.71.6",
-    "react-native-web": "~0.18.11"
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "expo": "^54.0.13",
+    "expo-status-bar": "~3.0.8",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native": "0.81.4",
+    "react-native-web": "^0.21.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@types/react": "~18.0.27",
+    "@types/react": "~19.1.10",
     "@types/react-native": "~0.64.12",
-    "typescript": "^4.9.4"
+    "typescript": "~5.9.2"
   },
-  "private": true
+  "private": true,
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
